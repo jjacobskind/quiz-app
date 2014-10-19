@@ -1,0 +1,44 @@
+<div ng-controller="QuizCtrl as quiz2">
+  <div id='new_question'>
+    <form ng-submit="newQuestion(question, answers, difficulty)">
+      <div class='col-md-5'>
+      </div>
+      <div class='col-md-1'>
+        <label>Question:</label>
+        <label>Answers:</label>
+        <label>Difficulty:</label>
+      </div>
+      <div class='col-md-1'>
+        <input type="text" name="question" ng-model="question">
+        <input type="text" name="answers" ng-model="answers">
+        <input type="text" name="difficulty" ng-model="difficulty">
+      </div>
+      <div class='submit'>
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+  <div id='score'>
+    <strong>Score: {{score}}</strong>
+    <p><a href ng-click='startTime()'>Start Timer</a></p>
+    <p>{{time}}</p>
+  </div>  
+  <ul>
+    <li ng-repeat="question in quiz | orderBy:'difficulty'">
+      <div class='question'>
+        <strong>{{$index+1}}. {{question.q}}</strong>
+        <br>
+        <div class='btn-group' ng-hide='question.answered'>
+          <button class='btn btn-default' ng-repeat="option in question.options | shuffle" ng-click="question.guess = option.value; question.answered = true" value='{{option.value}}'>{{option.value}}</button>
+        </div>
+        <p ng-show='question.guess'>You answered {{question.guess}}</p>
+      </div>
+    </li> 
+  </ul>
+</div>
+
+<!-- <div ng-controller='QuizCtrl as quiz'>
+  <div ng-controller='QuestionCtrl as question'>
+
+  </div>
+</div> -->
